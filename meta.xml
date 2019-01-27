@@ -1,0 +1,4 @@
+<meta>
+  <info name="vehicleSize" author="SlliX" type="script" />
+  <script src="vehicleSize.lua" type="server"/>
+</meta>
