@@ -218,6 +218,7 @@ function getVehicleSize(vehicleID)
 	return vehicleSize
 end
 
+
 function getBiggerVehicle(vehicleID1, vehicleID2)
 	vehicleSize1 = vehicles[vehicleID1][2] 
 	vehicleSize2 = vehicles[vehicleID2][2] 
@@ -238,26 +239,75 @@ function getSmallerVehicle(vehicleID1, vehicleID2)
 		end
 end
 
+
 function getBiggestVehicleFromRange(vehicleID1, vehicleID2)
 	local biggestVehicle = 0
 	local biggestVehicleID = 0
 	for i=vehicleID1, vehicleID2 do
 		if vehicles[i][2] > biggestVehicle then
-		biggestVehicle = vehicles[i][2]
-		biggestVehicleID = i
+			biggestVehicle = vehicles[i][2]
+			biggestVehicleID = i
 		end
 	end 
 	return biggestVehicleID
 end
+
+function getBiggestVehicleFromTable(tbl)
+	local biggestVehicle = 0
+	local biggestVehicleID = 0
+	for i, v in ipairs(tbl) do 
+		if vehicles[v][2] > biggestVehicle then
+			biggestVehicle = vehicles[v][2]
+			biggestVehicleID = v
+		end
+	end	
+	return biggestVehicleID
+end
+
 
 function getSmallestVehicleFromRange(vehicleID1, vehicleID2)
 	local smallestVehicle = 68633.11182147
 	local smallestVehicleID = 0
 	for i=vehicleID1, vehicleID2 do
 		if vehicles[i][2] < smallestVehicle then
-		smallestVehicle = vehicles[i][2]
-		smallestVehicleID = i
+			smallestVehicle = vehicles[i][2]
+			smallestVehicleID = i
 		end
 	end 
 	return smallestVehicleID
+end
+
+function getSmallestVehicleFromTable(tbl)
+	local smallestVehicle = 68633.11182147
+	local smallestVehicleID = 0
+	for i, v in ipairs(tbl) do 
+		if vehicles[v][2] < smallestVehicle then
+			smallestVehicle = vehicles[v][2]
+			smallestVehicleID = v
+		end
+	end	
+	return smallestVehicleID
+end
+
+
+function sortVehicleSizesFromRange(vehicleID1, vehicleID2)
+	local sortedVehicles = {}
+		for i=vehicleID1, vehicleID2 do 
+			table.insert(sortedVehicles, {i, vehicles[i][2]} )
+		end
+			table.sort(sortedVehicles, function(a, b)
+				return a[2] < b[2]
+			end)							
+	return sortedVehicles
+end
+
+function sortVehicleSizesFromTable(tbl)
+	local sortedVehicles = {}
+		for i, v in ipairs(tbl) do 
+			table.insert(sortedVehicles, {v, vehicles[v][2]})
+		end
+			table.sort(sortedVehicles, function (a, b)
+				return a[2] < b[2]
+			end)
+	return sortedVehicles			
 end
